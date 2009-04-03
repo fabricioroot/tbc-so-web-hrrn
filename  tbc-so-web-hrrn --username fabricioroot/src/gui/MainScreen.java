@@ -655,8 +655,10 @@ public class MainScreen extends javax.swing.JApplet {
             this.st.setJDialogNextStep(null);
             this.st = null;
         }
-        if (t.isAlive()) {
-            t.stop();
+        if (this.t != null) {
+            if (t.isAlive()) {
+                t.stop();
+            }    
         }
         System.gc();
     }//GEN-LAST:event_jButtonRestartActionPerformed
@@ -689,6 +691,8 @@ public class MainScreen extends javax.swing.JApplet {
             }
         }
 
+        DecimalFormat df = new DecimalFormat("#0.00");
+
         float mediumWaintingTime = this.calculator.averageWaitingTime(this.reportBase);
         report += "\n\n* Tempo médio de espera\n";
         report += "(";
@@ -698,7 +702,7 @@ public class MainScreen extends javax.swing.JApplet {
                 report += "\n";
             }
         }
-        report += (int)this.reportBase.lastElement().getWaitingTime() + ") / " + this.reportBase.size() + " = " + mediumWaintingTime;
+        report += (int)this.reportBase.lastElement().getWaitingTime() + ") / " + this.reportBase.size() + " = " + df.format(mediumWaintingTime);
         
         report += "\n\n* Tempos de retorno (turn around)\n";
         
@@ -718,7 +722,7 @@ public class MainScreen extends javax.swing.JApplet {
                 report += "\n";
             }
         }
-        report += (int)this.reportBase.lastElement().getTurnAround() + ") / " + this.reportBase.size() + " = " + mediumTurnAround;
+        report += (int)this.reportBase.lastElement().getTurnAround() + ") / " + this.reportBase.size() + " = " + df.format(mediumTurnAround);
         
         JTextArea reportArea = new JTextArea(report);
         reportArea.setEditable(false);
