@@ -38,7 +38,6 @@ public class MainScreen extends javax.swing.JApplet {
     Calculator calculator = new Calculator(); //See the class 'Calculator' for more details
     
     AlgorithmStepsThread st;
-    
     Thread t;
 
     /** Initializes the applet MainScreen */    
@@ -614,6 +613,10 @@ public class MainScreen extends javax.swing.JApplet {
 }//GEN-LAST:event_jButtonCreateProcessActionPerformed
 
     private void jButtonAlgorithmStepsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonAlgorithmStepsActionPerformed
+        if (st == null) {
+            JOptionPane.showMessageDialog(null, "Será aberta uma janela com um botão \"OK\" para prosseguir os passos do algoritmo.\n" +
+                            "DICA: caso esta janela suma (saia da frente das outras janelas abertas), use as teclas \"ALT + TAB\" para colocá-la na frente novamente.", "ATENÇÃO", JOptionPane.WARNING_MESSAGE);
+        }
         if(st != null) {
             this.reportBase = this.st.getReportBase();
             this.timeCounter = this.st.getTimeCounter();
@@ -665,8 +668,7 @@ public class MainScreen extends javax.swing.JApplet {
 
     private void jButtonReportActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonReportActionPerformed
         String report = "";
-        report += "* OBS.: os processos abaixo são listados na ordem em que foram executados!\n";
-        report += "\n* Informações sobre os processos criados\n";
+        report += "\n* INFORMAÇÕES SOBRE OS PROCESSOS CRIADOS (POR ORDEM DE EXECUÇÃO)\n";
         
         if(st != null) {
             this.reportBase = st.getReportBase();
@@ -676,7 +678,7 @@ public class MainScreen extends javax.swing.JApplet {
             report += "P" + this.reportBase.elementAt(i).getId() + ": tempo de burst = " + (int)this.reportBase.elementAt(i).getLifeTime() + ";  tempo na criação = " + (int)this.reportBase.elementAt(i).getCreationTime() + ";\n";
         }
         
-        report += "***\n";
+        report += "\n***\n\n";
         
         for(int i = 0; i <= (this.processesList.size() - 1); i++) {
             report += "P" + this.processesList.elementAt(i).getId() + ": tempo de burst = " + (int)this.processesList.elementAt(i).getLifeTime() + ";  tempo na criação = " + (int)this.processesList.elementAt(i).getCreationTime() + ";\n";
